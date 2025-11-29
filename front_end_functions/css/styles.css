@@ -1,0 +1,605 @@
+/* =========================================================
+   ANKWATA FARM GLOBAL STYLES — THEME-READY (LIGHT / DARK / SYSTEM)
+   ========================================================= */
+
+/* Root Variables (Light Theme Default) */
+:root {
+  /* Theme Colors */
+  --color-primary: #6f42c1;
+  --color-secondary: #f8f9fa;
+  --color-accent: #e9ecef;
+  --color-dark: #212529;
+  --color-muted: #6c757d;
+  --color-border: #dee2e6;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-footer: rgba(78, 75, 77, 0.61);
+
+  /* Status Colors */
+  --color-success: #28a745;
+  --color-error: #dc3545;
+  --color-warning: #ffc107;
+  --color-info: #17a2b8;
+
+  /* Scrollbar */
+  --scrollbar-thumb: #696969;
+  --scrollbar-thumb-hover: #000;
+
+  /* Body and Text */
+  --bg-body: #ffffff;
+  --text-primary: #212529;
+  --text-secondary: #495057;
+}
+
+/* =========================================================
+   DARK THEME VARIABLES
+   ========================================================= */
+[data-theme="dark"] {
+  --color-primary: #bb86fc;
+  --color-secondary: #2b2b2b;
+  --color-accent: #3c3c3c;
+  --color-dark: #f8f9fa;
+  --color-muted: #b0b0b0;
+  --color-border: #444;
+  --color-shadow: rgba(0, 0, 0, 0.5);
+  --color-footer: rgba(40, 40, 40, 0.9);
+
+  --color-success: #4caf50;
+  --color-error: #ef5350;
+  --color-warning: #ffb300;
+  --color-info: #29b6f6;
+
+  --scrollbar-thumb: #555;
+  --scrollbar-thumb-hover: #777;
+
+  --bg-body: #121212;
+  --text-primary: #eaeaea;
+  --text-secondary: #cfcfcf;
+}
+
+/* System dark theme preference */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {  /* Only apply when no data-theme is set */
+    --color-primary: #bb86fc;
+    --color-secondary: #2b2b2b;
+    --color-accent: #3c3c3c;
+    --color-dark: #f8f9fa;
+    --color-muted: #b0b0b0;
+    --color-border: #444;
+    --color-shadow: rgba(0, 0, 0, 0.5);
+    --color-footer: rgba(40, 40, 40, 0.9);
+
+    --color-success: #4caf50;
+    --color-error: #ef5350;
+    --color-warning: #ffb300;
+    --color-info: #29b6f6;
+
+    --scrollbar-thumb: #555;
+    --scrollbar-thumb-hover: #777;
+
+    --bg-body: #121212;
+    --text-primary: #eaeaea;
+    --text-secondary: #cfcfcf;
+  }
+}
+
+/* =========================================================
+   UTILITY CLASSES
+   ========================================================= */
+.d-none,
+.not-allowed {
+  display: none;
+  pointer-events: none;
+  opacity: 0;
+  cursor: default;
+  text-decoration: none;
+}
+
+.required-field::after {
+  content: " *";
+  color: var(--color-error) !important;
+  font-weight: bold;
+}
+
+.page-break {
+  page-break-before: always;
+  margin: 10px 0;
+}
+@media print {
+  .page-break {
+    display: block;
+  }
+}
+
+/* =========================================================
+   SCROLLBAR STYLING
+   ========================================================= */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb) !important;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover) !important;
+}
+
+/* =========================================================
+   NAVIGATION & LAYOUT - UPDATED FOR RESPONSIVENESS
+   ========================================================= */
+
+.table-responsive table{
+    background-color: var(--color-secondary) !important;
+    border-right: 1px solid var(--color-border) !important;
+}
+.side-menu {
+  position: sticky;
+  top: 56px; /* height of top navbar */
+  height: calc(100vh - 56px);
+  overflow-y: auto;
+  background-color: var(--color-secondary) !important;
+  border-right: 1px solid var(--color-border) !important;
+  padding-top: 20px;
+  transition: transform 0.3s ease;
+}
+
+/* Mobile side menu styles */
+@media (max-width: 768px) {
+  .side-menu {
+    position: fixed;
+    left: -100%;
+    width: 280px;
+    z-index: 1035;
+    transform: translateX(-100%);
+  }
+  
+  .side-menu.show {
+    left: 0;
+    transform: translateX(0);
+  }
+  
+  .main-content {
+    margin-left: 0 !important;
+    width: 100%;
+  }
+}
+
+/* Side menu overlay for mobile */
+.side-menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1034;
+}
+
+.side-menu-overlay.show {
+  display: block;
+}
+
+.side-menu .nav button,
+.nav-tabs .nav-item a {
+  text-decoration: none;
+  width: 100%;
+  color: var(--text-secondary) !important;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  text-align: left;
+}
+.side-menu .nav button:hover,
+.nav-tabs .nav-item a:hover,
+.side-menu .nav .active,
+.nav-tabs .nav-item .active {
+  background-color: var(--color-accent) !important;
+  color: var(--color-primary) !important;
+  border-left: 4px solid var(--color-primary) !important;
+}
+
+.top-nav {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-footer) 100%) !important;
+  box-shadow: 0 2px 10px var(--color-shadow) !important;
+  z-index: 1020;
+  border-bottom: 1px solid var(--color-accent) !important;
+}
+.top-nav .navbar-brand {
+  color: white;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.main-content {
+  padding: 0.5rem;
+  background-color: var(--bg-body) !important;
+  min-height: calc(100vh - 56px);
+}
+
+.mainfooter {
+  bottom: 0;
+  width: 100%;
+  position: sticky;
+  position: -webkit-sticky;
+  background: var(--color-footer) !important;
+  color: var(--text-primary) !important;
+}
+
+/* =========================================================
+   CARD STYLES
+   ========================================================= */
+.card {
+  background-color: var(--color-secondary) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--color-border);
+  box-shadow: 0px 4px 10px var(--color-shadow) !important;
+}
+.card-body{overflow-y: auto;}
+
+/* =========================================================
+   TABLE SCROLL – THEME-COMPATIBLE + BOOTSTRAP FIXES
+   ========================================================= */
+
+.table-responsive {
+    max-height: 500px;
+    overflow-y: auto;
+    background-color: var(--color-secondary) !important;
+}
+
+/* Sticky header */
+.table-responsive thead th {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background-color: var(--color-secondary) !important;
+    color: var(--text-secondary) !important;
+    border-color: var(--color-border) !important;
+}
+
+/* Apply theme to ALL table cells – overrides Bootstrap */
+.table-responsive table tbody td {
+    background-color: var(--color-secondary) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--color-border) !important;
+}
+
+/* Optional: apply theme to header cells consistently */
+.table-responsive table thead th {
+    border-color: var(--color-border) !important;
+}
+
+/* Hover effect */
+.table-responsive table tbody tr:hover td {
+    background-color: var(--color-accent) !important;
+}
+
+/* Optional zebra stripes */
+.table-responsive table tbody tr:nth-child(even) td {
+    background-color: var(--color-accent) !important;
+}
+
+/* Ensure table wrapper inherits theme color */
+.table-responsive table {
+    background-color: var(--color-secondary) !important;
+    border-right: 1px solid var(--color-border) !important;
+}
+
+.list-group-item{
+    background-color: var(--color-secondary) !important;
+    color: var(--text-primary) !important;
+}
+
+.text-muted{color: var(--color-muted) !important;}
+
+.card i {
+  color: var(--color-primary) !important;
+}
+#tokenizationConfigView .card {
+  border: 1px solid var(--color-border) !important;
+  box-shadow: 0 0.125rem 0.25rem var(--color-shadow) !important;
+}
+
+/* =========================================================
+   TAB TRANSITIONS
+   ========================================================= */
+.tab-pane {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.tab-pane.show.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+.tab-pane:not(.show) {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.sidebar-section-title, .tab-pane div h4{color: var(--text-secondary) !important;}
+
+/* =========================================================
+   CONFIG LAYOUTS
+   ========================================================= */
+.config-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.75rem;
+}
+.config-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.config-item,
+.config-path {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--color-border) !important;
+}
+.config-path {
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+.config-path:last-child {
+  border-bottom: none;
+}
+.config-label {
+  font-weight: 500;
+  color: var(--text-secondary) !important;
+  font-size: 0.9rem;
+}
+.config-value {
+  color: var(--text-primary) !important;
+  font-weight: 400;
+  max-width: 200px;
+  background: var(--color-secondary) !important;
+  border: 1px solid var(--color-accent) !important;
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.config-pre {
+  background: var(--color-secondary) !important;
+  border: 1px solid var(--color-accent) !important;
+  border-radius: 0.375rem;
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  margin: 0;
+  max-height: 120px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* =========================================================
+   ACCORDION
+   ========================================================= */
+.accordion-button {
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+}
+.accordion-body {
+  padding: 1rem;
+}
+
+/* =========================================================
+   CHARTS & ALERTS
+   ========================================================= */
+.chart-container,
+.stock-alert {
+  max-height: 300px;
+  overflow: auto;
+}
+
+/* =========================================================
+   DASHBOARD & METRICS
+   ========================================================= */
+.bg-purple {
+  background-color: var(--color-primary) !important;
+}
+.metric-circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 10px;
+  background: var(--color-accent) !important;
+  color: var(--text-primary) !important;
+}
+.metric-circle span {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.metric-circle small {
+  font-size: 0.7rem;
+}
+.system-metrics .metric-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.system-metrics .metric-item span {
+  width: 80px;
+  font-weight: 500;
+}
+.system-metrics .metric-item .progress {
+  flex-grow: 1;
+  margin: 0 10px;
+}
+.system-metrics .metric-item small {
+  width: 60px;
+  text-align: right;
+  font-weight: 500;
+}
+.stat-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.stat-item i {
+  width: 20px;
+  margin-right: 10px;
+}
+.stat-item span {
+  flex-grow: 1;
+}
+.gauge-container {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}
+.gauge-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* =========================================================
+   RESPONSIVE ADJUSTMENTS
+   ========================================================= */
+@media (max-width: 768px) {
+  .card-body {
+    padding: 15px;
+  }
+  .metric-circle {
+    width: 60px;
+    height: 60px;
+  }
+  .metric-circle span {
+    font-size: 1rem;
+  }
+  .col-md-10 {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   GENERIC SPINNER STYLES
+   ========================================================= */
+.spinner-temp {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.spinner-inline {
+  display: inline-flex;
+  margin-left: 8px;
+}
+.spinner-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--color-primary) !important;
+  animation: spin 1s linear infinite;
+}
+.spinner-text {
+  color: var(--text-primary) !important;
+  font-size: 14px;
+  font-weight: 500;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* =========================================================
+   LOG PANEL
+   ========================================================= */
+#logPanel {
+  height: 600px;
+  max-height: 800px;
+  overflow-y: auto;
+  font-family: monospace;
+  background: var(--color-secondary) !important;
+  color: var(--text-primary) !important;
+}
+.log-entry .timestamp {
+  color: var(--color-muted) !important;
+}
+.log-entry .info { color: #0dcaf0; }
+.log-entry .warn { color: #ffc107; }
+.log-entry .error { color: #dc3545; }
+.log-entry .debug { color: #6c757d; }
+
+#logo {
+    animation: goatBlink 6s infinite;
+}
+
+/* Natural, irregular blink pattern */
+@keyframes goatBlink {
+    0%, 82% {
+        content: url("../../assets/files/images/blink2.png");
+    }
+
+    83%, 84% {
+        content: url("../../assets/files/images/blink1.png");
+    }
+
+    85%, 86% {
+        content: url("../../assets/files/images/blink2.png");
+    }
+
+    87%, 88% {
+        content: url("../../assets/files/images/blink1.png");
+    }
+
+    89%, 90% {
+        content: url("../../assets/files/images/blink2.png");
+    }
+
+    91%, 100% {
+        content: url("../../assets/files/images/blink2.png");
+    }
+}
+
+/* =========================================================
+   THEME-READY MODAL SUPPORT
+   ========================================================= */
+
+.modal-content {
+  background-color: var(--color-secondary) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--color-border) !important;
+  box-shadow: 0 4px 20px var(--color-shadow) !important;
+}
+
+.modal-header,
+.modal-footer {
+  background-color: var(--color-accent) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--color-border) !important;
+}
+
+.modal-title {
+  color: var(--text-primary) !important;
+}
+
+.btn-close {
+  filter: invert( var(--close-btn-invert, 0) );
+}
+
+/* Dark mode adjustment for close button visibility */
+[data-theme="dark"] .btn-close {
+  --close-btn-invert: 1;
+}
+
